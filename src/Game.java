@@ -37,7 +37,7 @@ public class Game extends JPanel implements Runnable {
 	private double frameTime;
 	private double renderTime=0;
 	
-	private ArrayList renderObjects;
+	private ArrayList<RenderObject> renderObjects;
 	
 	public Game() {
 		event=new GameEvent(this);
@@ -50,6 +50,7 @@ public class Game extends JPanel implements Runnable {
 		window.setVisible(true);
 		this.addKeyListener(event);
 		player = new Player(posx,posy,25,25,this);
+		renderObjects = new ArrayList<RenderObject>();
 		repaint();
 		
 		Thread go = new Thread(this);
@@ -70,6 +71,10 @@ public class Game extends JPanel implements Runnable {
 		g2d.setColor(Color.white);
 		g2d.fill(player);
 		
+		renderObjects.add(new RenderObject(0,700,800,100,'w'));
+		g2d.setColor(Color.blue);
+		g2d.fill(renderObjects.get(0));
+		
 	}
 	
 	
@@ -80,19 +85,15 @@ public class Game extends JPanel implements Runnable {
 			frameEnd = System.currentTimeMillis();
 			frameTime = (frameEnd-frameStart)/1000.0;
 			frameStart = System.currentTimeMillis();
-			lastValidPosx=posx;
-			lastValidPosy=posy;
+
+			vely+=(accy*frameTime);
 			
 			player.collide(renderObjects);
 			
-			vely+=(accy*frameTime);
+
 			posx+=velx*frameTime;
 			posy+=vely*frameTime;
 			
-			if(posy>725){
-				posy=725;
-				vely=0;
-			}
 			
 			if(renderTime>frameRate){
 				repaint();

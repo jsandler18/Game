@@ -1,4 +1,5 @@
 import java.awt.geom.Rectangle2D.Double;
+import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 
 /**
@@ -22,8 +23,21 @@ public class Player extends Double {
 	 * it then reacts based on the type of RenderObject it is colliding with.  
 	 * @param renderedObjects
 	 */
-	public void collide(ArrayList renderedObjects){
-		
+	public void collide(ArrayList<RenderObject> renderedObjects){
+		RenderObject temp;
+		for(int x = 0; x < renderedObjects.size(); x++){
+			temp = renderedObjects.get(x);
+			if(this.intersects(temp) && temp.getType()=='w'){
+				main.posx=main.lastValidPosx;
+				main.posy=main.lastValidPosy;
+				main.velx=0;
+				main.vely=0;
+			}else{
+				main.lastValidPosx=main.posx;
+				main.lastValidPosy=main.posy;
+			}
+			
+		}
 	}
 
 }
