@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,26 +10,34 @@ import javax.swing.JPanel;
 
 
 /*
- * left off trying to think of a way to make collidable objects that are not preset bounds.  perhaps 
- * make a class that extends rectangle2d.double as a wall class and load those into an arraylist?
+ * creating the collision method for the Player class
  */
 public class Game extends JPanel implements Runnable {
  
 	GameEvent event;
+	
+	public Player player;
 	
 	public double velx=0;
 	public double vely=0;
 	public double posx=400;
 	public double posy=400;
 	
-	final private double accy=2500;
-	final private double frameRate = 1/48.0; //seconds per frame
+	public double respawnPosx=400;
+	public double respawnPosy=400;
 	
+	public double lastValidPosx=400;
+	public double lastValidPosy=400;
+	
+	final private double accy=2500;
+	
+	final private double frameRate = 1/48.0; //seconds per frame
 	private long frameStart;
 	private long frameEnd;
 	private double frameTime;
-	
 	private double renderTime=0;
+	
+	private ArrayList renderObjects;
 	
 	public Game() {
 		event=new GameEvent(this);
@@ -40,6 +49,7 @@ public class Game extends JPanel implements Runnable {
 		this.setFocusable(true);
 		window.setVisible(true);
 		this.addKeyListener(event);
+		player = new Player(posx,posy,25,25,this);
 		repaint();
 		
 		Thread go = new Thread(this);
@@ -56,7 +66,7 @@ public class Game extends JPanel implements Runnable {
 		
 		
 		
-		Rectangle2D.Double player = new Rectangle2D.Double(posx,posy,25,25);
+		player.setRect(posx,posy,25,25);
 		g2d.setColor(Color.white);
 		g2d.fill(player);
 		
@@ -70,6 +80,11 @@ public class Game extends JPanel implements Runnable {
 			frameEnd = System.currentTimeMillis();
 			frameTime = (frameEnd-frameStart)/1000.0;
 			frameStart = System.currentTimeMillis();
+			lastValidPosx=posx;
+			lastValidPosy=posy;
+			
+			player.collide(renderObjects);
+			
 			vely+=(accy*frameTime);
 			posx+=velx*frameTime;
 			posy+=vely*frameTime;
