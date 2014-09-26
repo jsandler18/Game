@@ -20,11 +20,14 @@ public class Game extends JPanel implements Runnable {
 	public double posx=400;
 	public double posy=400;
 	
-	final private double accy=2000;
+	final private double accy=2500;
+	final private double frameRate = 1/48.0; //seconds per frame
 	
 	private long frameStart;
 	private long frameEnd;
 	private double frameTime;
+	
+	private double renderTime=0;
 	
 	public Game() {
 		event=new GameEvent(this);
@@ -52,7 +55,7 @@ public class Game extends JPanel implements Runnable {
 		
 		
 		
-		Rectangle2D.Double player = new Rectangle2D.Double(posx,posy,50,50);
+		Rectangle2D.Double player = new Rectangle2D.Double(posx,posy,25,25);
 		g2d.setColor(Color.white);
 		g2d.fill(player);
 		
@@ -75,7 +78,11 @@ public class Game extends JPanel implements Runnable {
 				vely=0;
 			}
 			
-			repaint();
+			if(renderTime>frameRate){
+				repaint();
+				renderTime=0;
+			}
+			renderTime+=frameTime;
 			try{
 				Thread.sleep(1);
 			}catch (Exception e){
