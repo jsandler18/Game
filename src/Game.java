@@ -9,7 +9,8 @@ import javax.swing.JPanel;
 
 
 /*
- * left off trying to think of a way to make collidable objects that are not preset bounds
+ * left off trying to think of a way to make collidable objects that are not preset bounds.  perhaps 
+ * make a class that extends rectangle2d.double as a wall class and load those into an arraylist?
  */
 public class Game extends JPanel implements Runnable {
  
