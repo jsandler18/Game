@@ -1,3 +1,4 @@
+import java.awt.geom.Rectangle2D;
 import java.awt.geom.Rectangle2D.Double;
 import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
@@ -32,12 +33,41 @@ public class Player extends Double {
 				main.posy=main.lastValidPosy;
 				main.velx=0;
 				main.vely=0;
+				System.out.println(main.posy +", " + main.lastValidPosy + ", "+ this.intersects(temp));
+				try{
+					Thread.sleep(10000);
+				}catch(Exception e){}
 			}else{
-				main.lastValidPosx=main.posx;
-				main.lastValidPosy=main.posy;
+				System.out.println(main.posy +", " + main.lastValidPosy + ", "+ this.intersects(temp));
 			}
 			
 		}
+	}
+	
+	//this doesn't work
+	public boolean intersects(Rectangle2D.Double test){
+
+		//intersects if this bottom higher than test bottom && lower than test top && is between left and right end points
+		if(((this.getY()+this.getHeight()) < (test.getY()+test.getHeight())) && ((this.getY()+this.getHeight()) > (test.getY())) && (((this.getX()) < (test.getX()+test.getWidth())) || ((this.getX()+this.getWidth()) > (test.getX())))){
+			return true;
+		}
+		//if this top is higher than test bottom && lower than test top && is between left and right end points
+		else if(((this.getY()) < (test.getY()+test.getHeight())) && ((this.getY()) > (test.getY())) && (((this.getX()) < (test.getX()+test.getWidth())) || ((this.getX()+this.getWidth()) > (test.getX())))){
+			return true;
+		}
+		//if this left is left of test right && right of test left && between top and bottom end points
+		else if((((this.getX()) < (test.getX()+test.getWidth())) && ((this.getX()) > (test.getX()))) && (((this.getY()) < (test.getY()+test.getHeight())) || ((this.getY()+this.getHeight()) > (test.getY())))){
+			return true;
+		}
+		//if this right is left of test right && right of test left && between top and bottom
+		else if((((this.getX()+this.getWidth()) < (test.getX()+test.getWidth())) && ((this.getX()+this.getWidth()) > (test.getX()))) && (((this.getY()) < (test.getY()+test.getHeight())) || ((this.getY()+this.getHeight()) > (test.getY())))){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+
 	}
 
 }

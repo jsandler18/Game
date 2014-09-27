@@ -90,12 +90,15 @@ public class Game extends JPanel implements Runnable {
 			
 			player.collide(renderObjects);
 			
+			lastValidPosx=posx;
+			lastValidPosy=posy;
 
 			posx+=velx*frameTime;
 			posy+=vely*frameTime;
 			
 			
 			if(renderTime>frameRate){
+
 				repaint();
 				renderTime=0;
 			}
