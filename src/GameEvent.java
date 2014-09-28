@@ -40,10 +40,10 @@ public class GameEvent implements KeyListener {
 		}
 		/*if(keyPressed==KeyEvent.VK_UP){
 			main.vely=0;
-		}*/
+		}
 		if(keyPressed==KeyEvent.VK_DOWN){
 			main.vely=0;
-		}
+		}*/
 	}
 
 	@Override

@@ -29,7 +29,8 @@ public class Game extends JPanel implements Runnable {
 	public double lastValidPosx=400;
 	public double lastValidPosy=400;
 	
-	final private double accy=2500;
+	
+	public double accy=2500;
 	
 	final private double frameRate = 1/48.0; //seconds per frame
 	private long frameStart;
@@ -90,8 +91,6 @@ public class Game extends JPanel implements Runnable {
 			
 			player.collide(renderObjects);
 			
-			lastValidPosx=posx;
-			lastValidPosy=posy;
 
 			posx+=velx*frameTime;
 			posy+=vely*frameTime;

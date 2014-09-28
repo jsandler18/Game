@@ -31,10 +31,12 @@ public class Player extends Double {
 			if(this.intersects(temp) && temp.getType()=='w'){
 				main.posx=main.lastValidPosx;
 				main.posy=main.lastValidPosy;
-				main.velx=0;
+				main.accy=0;
 				main.vely=0;
-
 			}else{
+				main.lastValidPosx=main.posx;
+				main.lastValidPosy=main.posy;
+				main.accy=2500;
 			}
 			
 		}
