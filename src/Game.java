@@ -95,8 +95,7 @@ public class Game extends JPanel implements Runnable {
 
 			posx+=velx*frameTime;
 			posy+=vely*frameTime;
-			
-			System.out.println(posy +", " + lastValidPosy);
+
 			
 			if(renderTime>frameRate){
 

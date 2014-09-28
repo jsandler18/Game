@@ -34,9 +34,6 @@ public class Player extends Double {
 				main.velx=0;
 				main.vely=0;
 
-				try{
-					Thread.sleep(10000);
-				}catch(Exception e){}
 			}else{
 			}
 			
@@ -44,16 +41,16 @@ public class Player extends Double {
 	}
 	
 	public boolean intersects(Rectangle2D.Double test){
-		if(test.contains(this.getX(),this.getY())){
+		if(test.contains(main.posx,main.posy)){
 			return true;
 		}
-		else if(test.contains(this.getX()+this.getWidth(), this.getY())){
+		else if(test.contains(main.posx+this.getWidth(), main.posy)){
 			return true;
 		}
-		else if(test.contains(this.getX(),this.getY()+this.getHeight())){
+		else if(test.contains(main.posx,main.posy+this.getHeight())){
 			return true;
 		}
-		else if(test.contains(this.getX()+this.getWidth(), this.getY()+this.getHeight())){
+		else if(test.contains(main.posx+this.getWidth(), main.posy+this.getHeight())){
 			return true;
 		}
 		return false;
