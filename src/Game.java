@@ -72,9 +72,16 @@ public class Game extends JPanel implements Runnable {
 		g2d.setColor(Color.white);
 		g2d.fill(player);
 		
-		renderObjects.add(new RenderObject(0,700,800,100,'w'));
-		g2d.setColor(Color.blue);
-		g2d.fill(renderObjects.get(0));
+		renderObjects.add(new RenderObject(0,700,800,100,'f'));
+		renderObjects.add(new RenderObject(700,0,10,800,'w'));
+		renderObjects.add(new RenderObject(100,0,10,800,'w'));
+		
+		for(int x = 0; x < renderObjects.size(); x++){
+			if(renderObjects.get(x).getType()=='w' || renderObjects.get(x).getType()=='f'){
+				g2d.setColor(Color.blue);
+				g2d.fill(renderObjects.get(x));
+			}
+		}
 		
 	}
 	

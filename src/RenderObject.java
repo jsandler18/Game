@@ -7,7 +7,7 @@ import java.awt.geom.Rectangle2D;
  * of the to left corner of the object, and the width and height of the object.
  * The last argument is a single char denoting what thing the object will be rendered as.
  * <br></br>
- * 'b' is for background, 'w' is for walls/floors, 'd' is for deadly objects.
+ * 'b' is for background, 'w' is for walls, 'f' is for floors/ceilings, 'd' is for deadly objects.
  * 
  * @author Jake
  *

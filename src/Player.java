@@ -28,11 +28,26 @@ public class Player extends Double {
 		RenderObject temp;
 		for(int x = 0; x < renderedObjects.size(); x++){
 			temp = renderedObjects.get(x);
-			if(this.intersects(temp) && temp.getType()=='w'){
+			if(this.intersects(temp) && temp.getType()=='f'){
 				main.posx=main.lastValidPosx;
 				main.posy=main.lastValidPosy;
-				main.accy=0;
-				main.vely=0;
+				if(this.directionY(temp)==2 && main.vely<0){
+					main.vely=0;
+				}
+				else if(this.directionY(temp)==0 && main.vely>0){
+					main.vely=0;
+					main.accy=0;
+				}
+			}
+			else if(this.intersects(temp) && temp.getType()=='w'){
+				main.posx=main.lastValidPosx;
+				main.posy=main.lastValidPosy;
+				if(this.directionX(temp)==1 && main.velx<0){
+					main.velx=0;
+				}
+				else if(this.directionX(temp)==3 && main.velx>0){
+					main.velx=0;
+				}
 			}else{
 				main.lastValidPosx=main.posx;
 				main.lastValidPosy=main.posy;
@@ -42,6 +57,13 @@ public class Player extends Double {
 		}
 	}
 	
+	/**
+	 * This method tests if there is any 
+	 * intersection between the player and 
+	 * the passed Rectangle2D.Double
+	 * @param test
+	 * @return boolean
+	 */
 	public boolean intersects(Rectangle2D.Double test){
 		if(test.contains(main.posx,main.posy)){
 			return true;
@@ -57,5 +79,30 @@ public class Player extends Double {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * This method tests which side of the passed Rectangle2D.Double 
+	 * the player is colliding with. It assumes that a collision has already been detected.
+	 * 
+	 * @param test
+	 * @return an integer representing one of 4 directions.  0 is up, 1 is right, 2 is down and 3 is left
+	 */
+	public int directionX(Rectangle2D.Double test){
+		if(main.posx<test.getX()){
+			return 3;
+		}
+		else if(main.posx>test.getX()){
+			return 1;
+		}
+		return 3;
+	}
+	public int directionY(Rectangle2D.Double test){
+		if(main.posy>test.getY()){
+			return 2;
+		}
+		else if(main.posy< test.getY()){
+			return 0;
+		}
+		return 0;
+	}
 }
