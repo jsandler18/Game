@@ -20,13 +20,10 @@ public class GameEvent implements KeyListener {
 		}
 		if(keyPressed==KeyEvent.VK_UP){
 			if(main.vely==0){
+				System.out.println("here");
 				main.vely=-1200;
 			}
 		}
-		if(keyPressed==KeyEvent.VK_DOWN){
-			main.vely=200;
-		}
-
 	}
 
 	@Override
@@ -38,12 +35,7 @@ public class GameEvent implements KeyListener {
 		if(keyPressed==KeyEvent.VK_RIGHT){
 			main.velx=0;
 		}
-		/*if(keyPressed==KeyEvent.VK_UP){
-			main.vely=0;
-		}
-		if(keyPressed==KeyEvent.VK_DOWN){
-			main.vely=0;
-		}*/
+
 	}
 
 	@Override

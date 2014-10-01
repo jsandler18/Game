@@ -48,6 +48,7 @@ public class Game extends JPanel implements Runnable {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.add(this);
 		this.setFocusable(true);
+		this.requestFocusInWindow();
 		window.setVisible(true);
 		this.addKeyListener(event);
 		player = new Player(posx,posy,25,25,this);
@@ -62,6 +63,7 @@ public class Game extends JPanel implements Runnable {
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		Graphics2D g2d=(Graphics2D) g;
+		
 		Rectangle2D.Double background = new Rectangle2D.Double(0,0,800,800);
 		g2d.setColor(Color.black);
 		g2d.fill(background);
