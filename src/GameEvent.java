@@ -13,10 +13,10 @@ public class GameEvent implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		int keyPressed = e.getExtendedKeyCode();
 		if(keyPressed==KeyEvent.VK_LEFT){
-			main.velx=-400;
+			main.velx=-500;
 		}
 		if(keyPressed==KeyEvent.VK_RIGHT){
-			main.velx=400;
+			main.velx=500;
 		}
 		if(keyPressed==KeyEvent.VK_UP){
 			if(main.vely==0){

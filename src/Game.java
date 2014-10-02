@@ -9,9 +9,7 @@ import javax.swing.JPanel;
 
 
 
-/*
- * creating the collision method for the Player class
- */
+
 public class Game extends JPanel implements Runnable {
  
 	GameEvent event;
@@ -32,7 +30,7 @@ public class Game extends JPanel implements Runnable {
 	
 	public double accy=2500;
 	
-	final private double frameRate = 1/48.0; //seconds per frame
+	final private double frameRate = 1/60.0; //seconds per frame
 	private long frameStart;
 	private long frameEnd;
 	private double frameTime;
