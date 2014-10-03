@@ -2,6 +2,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -26,6 +29,9 @@ public class Game extends JPanel implements Runnable {
 	
 	public double lastValidPosx=400;
 	public double lastValidPosy=400;
+	
+	int screenX=0;
+	int screenY=0;
 	
 	public boolean landed = false;
 	
@@ -52,6 +58,7 @@ public class Game extends JPanel implements Runnable {
 		this.addKeyListener(event);
 		player = new Player(posx,posy,25,25,this);
 		renderObjects = new ArrayList<RenderObject>();
+		loadScreen();
 		repaint();
 		
 		Thread go = new Thread(this);
@@ -72,11 +79,7 @@ public class Game extends JPanel implements Runnable {
 		player.setRect(posx,posy,25,25);
 		g2d.setColor(Color.white);
 		g2d.fill(player);
-		
-		renderObjects.add(new RenderObject(0,700,800,100,'f'));
-		renderObjects.add(new RenderObject(500,500,100,10,'f'));
-		renderObjects.add(new RenderObject(700,0,10,800,'w'));
-		renderObjects.add(new RenderObject(100,0,10,800,'w'));
+
 		
 		for(int x = 0; x < renderObjects.size(); x++){
 			if(renderObjects.get(x).getType()=='w' || renderObjects.get(x).getType()=='f'){
@@ -103,8 +106,9 @@ public class Game extends JPanel implements Runnable {
 
 			posx+=velx*frameTime;
 			posy+=vely*frameTime;
-
 			
+			loadScreen();
+
 			if(renderTime>frameRate){
 
 				repaint();
@@ -118,6 +122,33 @@ public class Game extends JPanel implements Runnable {
 			}
 		}
 
+	}
+	
+	public void loadScreen(){
+		File screen;
+		if(posx+25>800){
+			screenX++;
+			posx=0;
+		}
+		else if(posx<0){
+			screenX--;
+			posx=775;
+		}
+		else if(posy+25>800){
+			screenY--;
+			posy=0;
+		}
+		else if(posy<0){
+			screenY++;
+			posy=775;
+		}
+		renderObjects.clear();
+		screen = new File(screenX+","+screenY+".scrn");
+		try{
+			BufferedReader read = new BufferedReader(new FileReader(screen));
+		}catch(Exception e){
+			System.out.println("error in loading");
+		}
 	}
 
 	public static void main(String[] args) {
