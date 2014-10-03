@@ -29,19 +29,26 @@ public class Player extends Double {
 		for(int x = 0; x < renderedObjects.size(); x++){
 			temp = renderedObjects.get(x);
 			if(this.intersects(temp) && temp.getType()=='f'){
-				main.posx=main.lastValidPosx;
-				main.posy=main.lastValidPosy;
+
 				if(this.directionY(temp)==2 && main.vely<0){
+					main.posy=main.lastValidPosy;
 					main.vely=0;
 				}
 				else if(this.directionY(temp)==0 && main.vely>0){
+					main.landed = true;
 					main.vely=0;
-					main.accy=0;
+
 				}
 			}
-			else if(this.intersects(temp) && temp.getType()=='w'){
+			else{
+				main.lastValidPosy=main.posy;
+				if(main.vely>5){
+					main.landed=false;
+				}
+	
+			}
+			if(this.intersects(temp) && temp.getType()=='w'){
 				main.posx=main.lastValidPosx;
-				main.posy=main.lastValidPosy;
 				if(this.directionX(temp)==1 && main.velx<0){
 					main.velx=0;
 				}
@@ -50,8 +57,6 @@ public class Player extends Double {
 				}
 			}else{
 				main.lastValidPosx=main.posx;
-				main.lastValidPosy=main.posy;
-				main.accy=2500;
 			}
 			
 		}

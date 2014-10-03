@@ -27,6 +27,7 @@ public class Game extends JPanel implements Runnable {
 	public double lastValidPosx=400;
 	public double lastValidPosy=400;
 	
+	public boolean landed = false;
 	
 	public double accy=2500;
 	
@@ -73,6 +74,7 @@ public class Game extends JPanel implements Runnable {
 		g2d.fill(player);
 		
 		renderObjects.add(new RenderObject(0,700,800,100,'f'));
+		renderObjects.add(new RenderObject(500,500,100,10,'f'));
 		renderObjects.add(new RenderObject(700,0,10,800,'w'));
 		renderObjects.add(new RenderObject(100,0,10,800,'w'));
 		

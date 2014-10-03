@@ -19,9 +19,9 @@ public class GameEvent implements KeyListener {
 			main.velx=500;
 		}
 		if(keyPressed==KeyEvent.VK_UP){
-			if(main.vely==0){
-				System.out.println("here");
+			if(main.landed==true){
 				main.vely=-1200;
+				main.landed=false;
 			}
 		}
 	}
