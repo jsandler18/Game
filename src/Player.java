@@ -58,6 +58,16 @@ public class Player extends Double {
 			}else{
 				main.lastValidPosx=main.posx;
 			}
+			if(this.intersects(temp) && temp.getType()=='d'){
+				/*try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					System.out.println("thread sleep error");
+				}*/
+				main.posx=main.screenEnterX;
+				main.posy=main.screenEnterY;
+
+			}
 			
 		}
 	}
