@@ -90,7 +90,7 @@ public class Game extends JPanel implements Runnable {
 				g2d.setColor(Color.blue);
 				g2d.fill(renderObjects.get(x));
 			}
-			if(renderObjects.get(x).getType()=='d'){
+			else if(renderObjects.get(x).getType()=='d'){
 				g2d.setColor(Color.red);
 				g2d.fill(renderObjects.get(x));
 			}
@@ -115,7 +115,7 @@ public class Game extends JPanel implements Runnable {
 			posx+=velx*frameTime;
 			posy+=vely*frameTime;
 			
-			loadScreen();
+			
 
 			if(renderTime>frameRate){
 
@@ -124,10 +124,11 @@ public class Game extends JPanel implements Runnable {
 			}
 			renderTime+=frameTime;
 			try{
-				Thread.sleep(1);
+				Thread.sleep(4);
 			}catch (Exception e){
 				System.out.println("thread stop error");
 			}
+			loadScreen();
 		}
 
 	}
@@ -166,13 +167,16 @@ public class Game extends JPanel implements Runnable {
 
 
 		renderObjects.clear();
-		screen = new File("C:\\Users\\Jake\\Desktop\\programming\\Personal projects\\Game\\src\\"+screenX+","+screenY+".scrn");
+		screen = new File("C:\\Users\\Jake\\Desktop\\programming\\Java\\Personal projects\\Game\\src\\"+screenX+","+screenY+".scrn");
 
 		try{
 			BufferedReader read = new BufferedReader(new FileReader(screen));
 			String object;
 			object=read.readLine();
 			do{
+				if(object.charAt(0)=='#'){
+					continue;
+				}
 				renderObjects.add(createRenderObject(object));
 				object=read.readLine();
 			}while(object!=null);
