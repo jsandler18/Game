@@ -39,15 +39,7 @@ public class Player extends Double {
 					main.vely=0;
 
 				}
-			}
-			else{
-				main.lastValidPosy=main.posy;
-				if(main.vely>5){
-					main.landed=false;
-				}
-	
-			}
-			if(this.intersects(temp) && temp.getType()=='w'){
+				
 				main.posx=main.lastValidPosx;
 				if(this.directionX(temp)==1 && main.velx<0){
 					main.velx=0;
@@ -55,9 +47,17 @@ public class Player extends Double {
 				else if(this.directionX(temp)==3 && main.velx>0){
 					main.velx=0;
 				}
-			}else{
-				main.lastValidPosx=main.posx;
 			}
+			else{
+				main.lastValidPosx=main.posx;
+				main.lastValidPosy=main.posy;
+				if(main.vely>5){
+					main.landed=false;
+				}
+	
+			}
+
+
 			if(this.intersects(temp) && temp.getType()=='d'){
 				/*try {
 					Thread.sleep(1000);
@@ -66,6 +66,8 @@ public class Player extends Double {
 				}*/
 				main.posx=main.screenEnterX;
 				main.posy=main.screenEnterY;
+				main.velx=0;
+				main.vely=0;
 
 			}
 			
@@ -79,7 +81,7 @@ public class Player extends Double {
 	 * @param test
 	 * @return boolean
 	 */
-	public boolean intersects(Rectangle2D.Double test){
+	private boolean intersects(Rectangle2D.Double test){
 		if(test.contains(main.posx,main.posy)){
 			return true;
 		}
@@ -102,7 +104,7 @@ public class Player extends Double {
 	 * @param test
 	 * @return an integer representing one of 4 directions.  0 is up, 1 is right, 2 is down and 3 is left
 	 */
-	public int directionX(Rectangle2D.Double test){
+	private int directionX(Rectangle2D.Double test){
 		if(main.posx<test.getX()){
 			return 3;
 		}
@@ -111,7 +113,7 @@ public class Player extends Double {
 		}
 		return 3;
 	}
-	public int directionY(Rectangle2D.Double test){
+	private int directionY(Rectangle2D.Double test){
 		if(main.posy>test.getY()){
 			return 2;
 		}

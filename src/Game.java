@@ -167,7 +167,7 @@ public class Game extends JPanel implements Runnable {
 
 
 		renderObjects.clear();
-		screen = new File("C:\\Users\\Jake\\Desktop\\programming\\Java\\Personal projects\\Game\\src\\"+screenX+","+screenY+".scrn");
+		screen = new File("C:\\Users\\Jake\\Desktop\\programming\\Personal projects\\Game\\src\\"+screenX+","+screenY+".scrn");
 
 		try{
 			BufferedReader read = new BufferedReader(new FileReader(screen));
