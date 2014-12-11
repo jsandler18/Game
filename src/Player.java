@@ -29,25 +29,23 @@ public class Player extends Double {
 		for(int x = 0; x < renderedObjects.size(); x++){
 			temp = renderedObjects.get(x);
 			if(this.intersects(temp) && temp.getType()=='f'){
-				if(this.intersectsY(temp)){
-					if(this.directionY(temp)==2 && main.vely<0){
-						main.posy=main.lastValidPosy;
-						main.vely=0;
-					}
-					else if(this.directionY(temp)==0 && main.vely>0){
-						main.landed = true;
-						main.vely=0;
-	
-					}
+
+				if(this.directionY(temp)==2 && main.vely<0){
+					main.posy=main.lastValidPosy;
+					main.vely=0;
 				}
-				else if(this.intersectsX(temp)){
-					main.posx=main.lastValidPosx;
-					if(this.directionX(temp)==1 && main.velx<0){
-						main.velx=0;
-					}
-					else if(this.directionX(temp)==3 && main.velx>0){
-						main.velx=0;
-					}
+				else if(this.directionY(temp)==0 && main.vely>0){
+					main.landed = true;
+					main.vely=0;
+
+				}
+				
+				main.posx=main.lastValidPosx;
+				if(this.directionX(temp)==1 && main.velx<0){
+					main.velx=0;
+				}
+				else if(this.directionX(temp)==3 && main.velx>0){
+					main.velx=0;
 				}
 			}
 			else{
@@ -94,26 +92,6 @@ public class Player extends Double {
 			return true;
 		}
 		else if(test.contains(main.posx+this.getWidth(), main.posy+this.getHeight())){
-			return true;
-		}
-		return false;
-	}
-	
-	private boolean intersectsX(Rectangle2D.Double test){
-		if(test.contains(main.posx,this.getCenterY())){
-			return true;
-		}
-		else if(test.contains(main.posx+this.getWidth(), this.getCenterY())){
-			return true;
-		}
-		return false;
-	}
-	
-	private boolean intersectsY(Rectangle2D.Double test){
-		if(test.contains(this.getCenterX(),main.posy+this.getHeight())){
-			return true;
-		}
-		else if(test.contains(this.getCenterX(), main.posy)){
 			return true;
 		}
 		return false;
